@@ -84,7 +84,6 @@ public class BuscarActivity extends AppCompatActivity {
                             detalleHojaRuta.setBultos(jsonObject1.getString("Bultos"));
                             detalleHojaRuta.setEstado(jsonObject1.getString("Estado"));
                             detalleHojaRuta.setIddetallehojaruta(jsonObject1.getString("iddetallehojaruta"));
-
                             clientesarray.add(detalleHojaRuta);
                         }
 
@@ -119,6 +118,7 @@ public class BuscarActivity extends AppCompatActivity {
             listaInformacion.add(clientesarray.get(i).getNumerohojaruta() + " \n" + clientesarray.get(i).getCliente() );
 
         }
+
         ArrayAdapter<String> adaptador = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listaInformacion);
         lvclientes.setAdapter(adaptador);
 
