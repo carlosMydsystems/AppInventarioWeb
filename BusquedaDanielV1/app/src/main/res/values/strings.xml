@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ZONA DE DISTRIBUCION TAI HENG</string>
+    <string name="control_hoja_ruta">Control Hoja Ruta</string>
+    <string name="menu_principal">Menu Principal</string>
+    <string name="control_bultos">Control Bultos</string>
+    <string name="name">Name</string>
+
+    <string-array name="Estadosdisponibles">
+        <item>Aceptación Total</item>
+        <item>Rechazo Total</item>
+        <item>Rechazo Parcial</item>
+    </string-array>
+</resources>
