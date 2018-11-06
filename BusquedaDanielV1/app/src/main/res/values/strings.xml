@@ -5,6 +5,7 @@
     <string name="control_bultos">Control Bultos</string>
     <string name="name">Name</string>
     <string name="lista_de_pedidos">Lista de Pedidos</string>
+    <string name="listado">Listado</string>
 
     <string-array name="Estadosdisponibles">
         <item>Aceptación Total</item>

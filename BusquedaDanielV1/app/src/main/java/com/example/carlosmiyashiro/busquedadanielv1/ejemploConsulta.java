@@ -1,5 +1,6 @@
 package com.example.carlosmiyashiro.busquedadanielv1;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class ejemploConsulta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejemplo_consulta);
+        listaejemplo = new ArrayList<>();
+        lvclientes = findViewById(R.id.lvlistadoPrueba);
 
         buscar();
     }
@@ -65,10 +68,15 @@ public class ejemploConsulta extends AppCompatActivity {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             periodo = jsonObject1.getString("PERIODO");
                             cantidadhojaruta = jsonObject1.getString("CANT_HRUTA");
-                            listaejemplo.add(periodo+"  "+cantidadhojaruta);
+                            listaejemplo.add(periodo+"     "+cantidadhojaruta);
                         }
 
-                        ObtenerLista();
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_expandable_list_item_1,listaejemplo);
+
+                        lvclientes.setAdapter(adapter);
+
+                        Toast.makeText(ejemploConsulta.this, listaejemplo.get(0), Toast.LENGTH_SHORT).show();
+                        //ObtenerLista();
 
                     }else{
                         AlertDialog.Builder  builder = new AlertDialog.Builder(
@@ -95,7 +103,6 @@ public class ejemploConsulta extends AppCompatActivity {
 
         ArrayAdapter<String> adaptador = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listaejemplo);
         lvclientes.setAdapter(adaptador);
-/*
         lvclientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -109,11 +116,7 @@ public class ejemploConsulta extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
-
             }
         });
-        */
     }
-
-
 }
