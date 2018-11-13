@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,13 +26,12 @@ import java.util.ArrayList;
 
 public class DetalleBusquedaActivity extends AppCompatActivity {
 
-    TextView tvcanal, tvcliente,tvdireccion,tvprovincia,tvtienda;
+    TextView tvcanal, tvcliente,tvdireccion,tvdistrito,tvtienda;
     Button btnregresar,btnregistrarasistencia;
-    String estadopedido,iddetallehojaruta,Factura;
+    String estadopedido,iddetallehojaruta,Factura,Id_Cliente;
     Spinner spestadopedido;
     ArrayAdapter<String> ComboAdapter;
     ArrayList<String> lista;
-    CheckBox cbdocumentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,34 +41,10 @@ public class DetalleBusquedaActivity extends AppCompatActivity {
         tvcanal = findViewById(R.id.tvcanal);
         tvcliente = findViewById(R.id.tvRazonSocial);
         tvdireccion = findViewById(R.id.tvDireccion);
-        tvprovincia = findViewById(R.id.tvProvincia);
-        tvtienda = findViewById(R.id.tvTienda);
+        tvdistrito = findViewById(R.id.tvdistrito);
         spestadopedido = findViewById(R.id.spEstadoPedido);
-        cbdocumentos =  findViewById(R.id.cbDocumentos);
 
-        lista = new ArrayList<>();
-        lista.add("Aceptación Total");
-        lista.add("Rechazo Total");
-        lista.add("Rechazo Parcial");
-
-        ComboAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1,lista);
-        spestadopedido.setAdapter(ComboAdapter);
-
-        spestadopedido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                estadopedido = (String) adapterView.getItemAtPosition(i);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        btnregistrarasistencia = findViewById(R.id.btnregistrarasistencia);
+        btnregistrarasistencia = findViewById(R.id.btnCtacte);
         btnregistrarasistencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,12 +68,14 @@ public class DetalleBusquedaActivity extends AppCompatActivity {
             }
         });
 
-        btnregresar = findViewById(R.id.btnRegresar);
+        btnregresar = findViewById(R.id.btnListarDocumento);
 
         btnregresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetalleBusquedaActivity.this,MainActivity.class);
+                Intent intent = new Intent(DetalleBusquedaActivity.this,ListaDocumentosActivity
+                        .class);
+                intent.putExtra("Id_Cliente",Id_Cliente);
                 startActivity(intent);
                 finish();
             }
@@ -114,9 +90,11 @@ public class DetalleBusquedaActivity extends AppCompatActivity {
             tvcanal.setText(iddetallehojaruta);
             tvcliente.setText(client.getCliente());
             tvdireccion.setText(client.getDireccion());
-            tvprovincia.setText(client.getTelefono());
-            tvtienda.setText(client.getBultos());
+            tvdistrito.setText(client.getDistrito());
+            Id_Cliente = client.getCodCliente();
+         // tvtienda.setText(client.getBultos());
             Factura = client.getFactura();
+
 
         }
     }
@@ -151,8 +129,6 @@ public class DetalleBusquedaActivity extends AppCompatActivity {
                 }
             }
         };
-
-
 
         ActualizarEstadoPedidoHojaRuta actualizarEstadoPedidoHojaRuta = new ActualizarEstadoPedidoHojaRuta(estadopedido,
                 iddetallehojaruta,"Entregado", responseListener);

@@ -3,13 +3,15 @@
     <string name="control_hoja_ruta">Control Hoja Ruta</string>
     <string name="menu_principal">Menu Principal</string>
     <string name="control_bultos">Control Bultos</string>
-    <string name="name">Name</string>
     <string name="lista_de_pedidos">Lista de Pedidos</string>
     <string name="listado">Listado</string>
 
-    <string-array name="Estadosdisponibles">
-        <item>Aceptación Total</item>
-        <item>Rechazo Total</item>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Opciones">
+        <item>Aceptacion Total</item>
         <item>Rechazo Parcial</item>
+        <item>Rechazo Total</item>
     </string-array>
 </resources>

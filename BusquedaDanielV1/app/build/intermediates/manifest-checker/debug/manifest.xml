@@ -33,7 +33,8 @@
         <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.ListarPedidos" />
         <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.MenuPrincipal" />
         <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.ejemploConsulta" />
-        <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.PruebaActivity" />
+        <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.ListaDocumentosActivity" />
+        <activity android:name="com.example.carlosmiyashiro.busquedadanielv1.SpinnerActivity" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"

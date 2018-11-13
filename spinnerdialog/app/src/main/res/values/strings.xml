@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">spinnerdialog</string>
+    <string-array name="opciones">
+
+        <item>estado 1</item>
+        <item>estado 2</item>
+        <item>estado 3</item>
+
+    </string-array>
+
+
+</resources>

@@ -24,4 +24,5 @@ public class EjemploRequest extends StringRequest {
     public Map <String, String> getParams() {
         return params;
     }
+
 }

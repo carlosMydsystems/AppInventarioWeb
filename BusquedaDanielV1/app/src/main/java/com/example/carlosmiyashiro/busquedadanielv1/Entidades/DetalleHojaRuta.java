@@ -7,6 +7,7 @@ public class DetalleHojaRuta implements Serializable{
     private String iddetallehojaruta;
     private String numerohojaruta;
     private String cliente;
+    private String codCliente;
     private String direccion;
     private String telefono;
     private String bultos;
@@ -17,14 +18,16 @@ public class DetalleHojaRuta implements Serializable{
     private String pedido;
     private String importe;
     private String observaciones;
+    private String distrito;
 
     public DetalleHojaRuta(String iddetallehojaruta, String numerohojaruta, String cliente,
-                           String direccion, String telefono, String bultos, String estado,
-                           String factura, String formaPago, String guiaRemision, String pedido,
-                           String importe, String observaciones) {
+                           String codCliente, String direccion, String telefono, String bultos,
+                           String estado, String factura, String formaPago, String guiaRemision,
+                           String pedido, String importe, String observaciones, String distrito) {
         this.iddetallehojaruta = iddetallehojaruta;
         this.numerohojaruta = numerohojaruta;
         this.cliente = cliente;
+        this.codCliente = codCliente;
         this.direccion = direccion;
         this.telefono = telefono;
         this.bultos = bultos;
@@ -35,11 +38,27 @@ public class DetalleHojaRuta implements Serializable{
         this.pedido = pedido;
         this.importe = importe;
         this.observaciones = observaciones;
+        this.distrito = distrito;
     }
 
     public DetalleHojaRuta() {
     }
 
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getCodCliente() {
+        return codCliente;
+    }
+
+    public void setCodCliente(String codCliente) {
+        this.codCliente = codCliente;
+    }
 
     public String getImporte() {
         return importe;

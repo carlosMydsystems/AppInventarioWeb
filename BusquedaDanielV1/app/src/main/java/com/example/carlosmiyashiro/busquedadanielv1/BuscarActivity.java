@@ -78,8 +78,10 @@ public class BuscarActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             detalleHojaRuta.setNumerohojaruta(jsonObject1.getString("numerohojaruta"));
                             detalleHojaRuta.setCliente(jsonObject1.getString("Cliente"));
+                            detalleHojaRuta.setCodCliente(jsonObject1.getString("CodCliente"));
                             detalleHojaRuta.setFactura(jsonObject1.getString("Factura"));
                             detalleHojaRuta.setDireccion(jsonObject1.getString("Direccion"));
+                            detalleHojaRuta.setDistrito(jsonObject1.getString("Distrito"));
                             detalleHojaRuta.setTelefono(jsonObject1.getString("Telefono"));
                             detalleHojaRuta.setBultos(jsonObject1.getString("Bultos"));
                             detalleHojaRuta.setEstado(jsonObject1.getString("Estado"));
@@ -96,7 +98,6 @@ public class BuscarActivity extends AppCompatActivity {
                                 .setNegativeButton("Regresar",null)
                                 .create()
                                 .show();
-
                     }
 
                 } catch (JSONException e) {
@@ -115,8 +116,8 @@ public class BuscarActivity extends AppCompatActivity {
 
         for (int i=0; i< clientesarray.size();i++){
 
-            listaInformacion.add(clientesarray.get(i).getNumerohojaruta() + " \n" + clientesarray.get(i).getCliente() );
-
+            listaInformacion.add(clientesarray.get(i).getCodCliente() + " \n" + clientesarray.get(i).getCliente() +
+                    " \n" + clientesarray.get(i).getDireccion());
         }
 
         ArrayAdapter<String> adaptador = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listaInformacion);
@@ -127,8 +128,6 @@ public class BuscarActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 DetalleHojaRuta client = clientesarray.get(position);
-                String prueba = clientesarray.get(position).getCliente();
-                Toast.makeText(getApplicationContext(), prueba, Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("DetalleHojaRuta",client);
                 Intent intent = new Intent(BuscarActivity.this,DetalleBusquedaActivity.class);

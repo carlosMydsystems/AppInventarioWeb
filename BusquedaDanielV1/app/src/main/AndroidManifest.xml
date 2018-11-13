@@ -25,7 +25,8 @@
         <activity android:name=".ListarPedidos" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".ejemploConsulta" />
-        <activity android:name=".PruebaActivity"></activity>
+        <activity android:name=".ListaDocumentosActivity" />
+        <activity android:name=".SpinnerActivity"></activity>
     </application>
 
 </manifest>
