@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EjemploSpinnerAlertDialog</string>
+
+    <string-array name="ObjetosEjemplo">
+        <Item>----------</Item>
+        <Item>Rechazo Total</Item>
+        <Item>Rechazo Parcial</Item>}
+        <Item>aevptacion total</Item>
+    </string-array>
+
+</resources>

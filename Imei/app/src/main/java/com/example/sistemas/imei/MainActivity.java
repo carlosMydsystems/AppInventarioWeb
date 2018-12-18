@@ -1,6 +1,7 @@
 package com.example.sistemas.imei;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 mostrar_imei.setText(imei);
             }
         });
-
     }
 
     private void consultarPermiso(String permission, Integer requestCode) {
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("MissingPermission")
     private String obtenerIMEI() {
         final TelephonyManager telephonyManager= (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
 
