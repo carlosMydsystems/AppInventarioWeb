@@ -8,6 +8,7 @@ public class Inventario implements Serializable {
     private String codigoProducto;
     private String cantidad;
     private String descripcion;
+
     private String idUsuario;
 
     public Inventario(String id, String codigoProducto, String cantidad, String descripcion, String idUsuario) {

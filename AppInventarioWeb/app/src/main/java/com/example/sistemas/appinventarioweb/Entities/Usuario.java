@@ -13,8 +13,12 @@ public class Usuario implements Serializable {
     private String codAlmacen;
     private String codTienda;
     private String lugar;
+    private String llave;
+    private String conteo;
 
-    public Usuario(String nombre, String user, String fechaActual, String tipoCambio, String moneda, String codVendedor, String codAlmacen, String codTienda, String lugar) {
+    public Usuario(String nombre, String user, String fechaActual, String tipoCambio, String moneda,
+                   String codVendedor, String codAlmacen, String codTienda, String lugar, String llave,
+                   String conteo) {
         this.nombre = nombre;
         this.user = user;
         this.fechaActual = fechaActual;
@@ -24,9 +28,27 @@ public class Usuario implements Serializable {
         this.codAlmacen = codAlmacen;
         this.codTienda = codTienda;
         this.lugar = lugar;
+        this.llave = llave;
+        this.conteo = conteo;
     }
 
     public Usuario() {
+    }
+
+    public String getLlave() {
+        return llave;
+    }
+
+    public void setLlave(String llave) {
+        this.llave = llave;
+    }
+
+    public String getConteo() {
+        return conteo;
+    }
+
+    public void setConteo(String conteo) {
+        this.conteo = conteo;
     }
 
     public String getNombre() {

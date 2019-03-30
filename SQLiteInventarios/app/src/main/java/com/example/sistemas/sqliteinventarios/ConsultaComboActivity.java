@@ -9,5 +9,9 @@ public class ConsultaComboActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_combo);
+
+
+        getApplicationContext().deleteDatabase("bd_inventarios");
+
     }
 }

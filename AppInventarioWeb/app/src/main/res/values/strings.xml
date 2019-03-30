@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AppInventarioWeb</string>
+
+    <string-array name="opciones">
+        <item>Eliminar</item>
+        <item>cancelar</item>
+    </string-array>
+
+
 </resources>

@@ -25,8 +25,6 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     EditText etusuario,etclave;
     Button btnlogeo;
     Usuario usuario;
@@ -51,8 +49,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (etusuario.getText().equals("") || etclave.getText().equals("")){
 
                 }else{
+
                     verificarUsuario(etusuario.getText().toString().replace(" ","").toUpperCase()
                             ,etclave.getText().toString().replace(" ","").toUpperCase());
+
                 }
             }
         });
@@ -63,39 +63,74 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
 
         url =  "http://www.taiheng.com.pe:8494/oracle/ejecutaFuncionCursorTestMovil.php?funcion=" +
-                "PKG_WEB_HERRAMIENTAS.FN_WS_LOGIN&variables='7|"+Codigo_usuario+"|"+Contraseña_usuario+"'"; // se debe actalizar la URL
+                "PKG_WEB_HERRAMIENTAS.FN_WS_LOGIN&variables='11|"+Codigo_usuario+"|"+Contraseña_usuario+"'"; // se debe actalizar la URL
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url ,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response1) {
+                        String Mensaje = "";
+                        Toast.makeText(LoginActivity.this, response1, Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject=new JSONObject(response1);
                             boolean success = jsonObject.getBoolean("success");
+                            Boolean condicion = false,error = false;
+
                             if (success){
-                                JSONArray jsonArray = jsonObject.getJSONArray("hojaruta");
 
-                                for(int i=0;i<jsonArray.length();i++) {
-                                    usuario = new Usuario();
-                                    jsonObject = jsonArray.getJSONObject(i);
-                                    usuario.setCodAlmacen(jsonObject.getString("COD_ALMACEN"));
-                                    usuario.setNombre(jsonObject.getString("NOMBRE"));
-                                    usuario.setMoneda(jsonObject.getString("MONEDA"));
-                                    usuario.setCodTienda(jsonObject.getString("COD_TIENDA"));
-                                    usuario.setCodVendedor(jsonObject.getString("COD_VENDEDOR"));
-                                    usuario.setFechaActual(jsonObject.getString("FECHA_ACTUAL"));
-                                    usuario.setTipoCambio(jsonObject.getString("TIPO_CAMBIO"));
-                                    usuario.setLugar("LIMA"); // Se usa en la busqueda de producto
-                                    usuario.setUser(etusuario.getText().toString());
+                                String Aux = response1.replace("{","|");
+                                Aux = Aux.replace("}","|");
+                                Aux = Aux.replace("[","|");
+                                Aux = Aux.replace("]","|");
+                                Aux = Aux.replace("\"","|");
+                                Aux = Aux.replace(","," ");
+                                Aux = Aux.replace("|","");
+                                Aux = Aux.replace(":"," ");
+                                String partes[] = Aux.split(" ");
 
+                                for (String palabras : partes){
+                                    if (condicion){ Mensaje += palabras+" "; }
+                                    if (palabras.equals("ERROR")){
+                                        condicion = true;
+                                        error = true;
+                                    }
                                 }
-                                Toast.makeText(LoginActivity.this, usuario.getCodVendedor(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("Usuario",usuario);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                finish();
+                                if (error) {
+
+                                    android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(
+                                            LoginActivity.this);
+                                    dialog.setMessage(Mensaje)
+                                            .setNegativeButton("Regresar",null)
+                                            .create()
+                                            .show();
+                                }else {
+
+
+                                    JSONArray jsonArray = jsonObject.getJSONArray("hojaruta");
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        usuario = new Usuario();
+                                        jsonObject = jsonArray.getJSONObject(i);
+                                        usuario.setCodAlmacen(jsonObject.getString("COD_ALMACEN"));
+                                        usuario.setNombre(jsonObject.getString("NOMBRE"));
+                                        usuario.setMoneda(jsonObject.getString("MONEDA"));
+                                        usuario.setCodTienda(jsonObject.getString("COD_TIENDA"));
+                                        usuario.setCodVendedor(jsonObject.getString("COD_VENDEDOR"));
+                                        usuario.setFechaActual(jsonObject.getString("FECHA_ACTUAL"));
+                                        usuario.setTipoCambio(jsonObject.getString("TIPO_CAMBIO"));
+                                        usuario.setConteo(jsonObject.getString("CONTEO"));
+                                        usuario.setLlave(jsonObject.getString("INVENTARIO"));
+                                        usuario.setLugar("LIMA"); // Se usa en la busqueda de producto
+                                        usuario.setUser(etusuario.getText().toString());
+                                    }
+
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("Acumulador","1");
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("Usuario", usuario);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }else{
                                 AlertDialog.Builder build1 = new AlertDialog.Builder(LoginActivity.this);
                                 build1.setTitle("Usuario  o Clave incorrecta")
@@ -121,4 +156,8 @@ public class LoginActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
     }
+
+
+
+
 }

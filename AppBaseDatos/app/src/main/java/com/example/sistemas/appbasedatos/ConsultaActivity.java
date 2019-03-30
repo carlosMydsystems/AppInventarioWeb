@@ -31,7 +31,6 @@ public class ConsultaActivity extends AppCompatActivity {
         etdocumento = findViewById(R.id.etDocumento);
         etnomnbre = findViewById(R.id.etNombre);
         ettelefono = findViewById(R.id.etTelefono);
-
         btnconsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

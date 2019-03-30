@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Toma Pedidos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="opciones">
+        <item>Editar Producto</item>
+        <item>Borrar Producto</item>
+        <item>cancelar</item>
+    </string-array>
+    <string-array name="opcionesDocumento">
+        <item>Boleta</item>
+        <item>Factura</item>
+    </string-array>
+    <string-array name="sucursal">
+        <item>Principal</item>
+        <item>Sucursal</item>
+    </string-array>
+</resources>

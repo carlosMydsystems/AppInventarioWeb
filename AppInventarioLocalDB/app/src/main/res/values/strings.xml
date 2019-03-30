@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppInventarioLocalDB</string>
+
+    <string-array name="opcionesdb">
+        <item>Eliminar</item>
+        <item>Cancelar</item>
+    </string-array>
+
+
+</resources>
