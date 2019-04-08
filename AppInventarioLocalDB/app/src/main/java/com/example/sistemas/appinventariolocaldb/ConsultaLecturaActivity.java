@@ -67,7 +67,6 @@ public class ConsultaLecturaActivity extends AppCompatActivity {
         ibregresarmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(ConsultaLecturaActivity.this,MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Usuario",usuario);

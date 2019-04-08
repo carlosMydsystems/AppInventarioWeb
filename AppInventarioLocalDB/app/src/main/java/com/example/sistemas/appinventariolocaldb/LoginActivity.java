@@ -69,20 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    /*
                     verificarUsuario(etusuario.getText().toString().replace(" ","").toUpperCase()
                             ,etclave.getText().toString().replace(" ","").toUpperCase());
-*/
-                    Intent intent = new Intent(LoginActivity.this, CargaDatosActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("Usuario", usuario);
-                    intent.putExtras(bundle);
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putSerializable("listaCargaMasInventario", listaCargaMasInventario);
-                    intent.putExtras(bundle1);
-                    startActivity(intent);
-                    finish();
-
 
                 }
             });

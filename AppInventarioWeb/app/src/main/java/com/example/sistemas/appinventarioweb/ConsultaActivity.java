@@ -40,11 +40,11 @@ public class ConsultaActivity extends AppCompatActivity {
     Button btnbuscarconsulta,btnprueba;
     ListView lvinventario;
     Usuario usuario ;
-    String url,acumulador;
+    String url,numeroArticulo,TRAMA;
     EditText etartcunsul;
     View mview;
     ListView listView;
-    ArrayList<String> listaMostrar,listadoString;
+    ArrayList<String> values,listaMostrar,listadoString;
     ImageButton ibvolverconsultamenu;
     ArrayList<RegistroInventario> listainventario;
     CustomAdapter adapter;
@@ -67,7 +67,7 @@ public class ConsultaActivity extends AppCompatActivity {
         etartcunsul = findViewById(R.id.etartconsulta);
         lvinventario = findViewById(R.id.lvInventario);
 
-        acumulador = getIntent().getStringExtra("Acumulador");
+        values = (ArrayList<String>)getIntent().getStringArrayListExtra("Values");
 
 
         btnprueba.setOnClickListener(new View.OnClickListener() {
@@ -350,7 +350,7 @@ public class ConsultaActivity extends AppCompatActivity {
                                         listado.add(listaconsulta);
                                         listadoString.add("\t\t\t\t"+listaconsulta.getCantidadConsulta()+" \t\t\t\t\t\t "+listaconsulta.getFecha());
                                         tvdetalleconsulta.setText(articulo.getArticulo().toString());
-
+                                        
                                     }
 
                                     etartcunsul.setText("");
@@ -399,23 +399,25 @@ public class ConsultaActivity extends AppCompatActivity {
                                                                         @Override
                                                                         public void onClick(DialogInterface dialog, int which) {
 
-                                                                    Intent intent = new Intent(ConsultaActivity.this,ConsultaActivity.class);
-                                                                    Bundle bundle = new Bundle();
-                                                                    Bundle bundle1 = new Bundle();
-                                                                    bundle.putSerializable("Usuario",usuario);
-                                                                    intent.putExtras(bundle);
-                                                                    bundle1.putSerializable("listainventario",listainventario);
-                                                                    intent.putExtras(bundle1);
-                                                                    String trama = articulo.getLlave()+"|"+
-                                                                            usuario.getCodAlmacen()+"|"+usuario.getConteo()+"|"+articulo.getCodArticulo()
-                                                                            +"|"+usuario.getUser().trim()+"|"+listado.get(position).getSecuencia();
+                                                                            Intent intent = new Intent(ConsultaActivity.this,ConsultaActivity.class);
+                                                                            Bundle bundle = new Bundle();
+                                                                            Bundle bundle1 = new Bundle();
+                                                                            bundle.putSerializable("Usuario",usuario);
+                                                                            intent.putExtras(bundle);
+                                                                            bundle1.putSerializable("listainventario",listainventario);
+                                                                            intent.putExtras(bundle1);
 
-                                                                    EliminarRegistroInventario(trama);
-                                                                    //listainventario.remove(position);
-                                                                    startActivity(intent);
-                                                                    finish();
-                                                                }
-                                                            }
+                                                                            String trama = articulo.getLlave()+"|"+
+                                                                                    usuario.getCodAlmacen()+"|"+usuario.getConteo()+"|"+articulo.getCodArticulo()
+                                                                                    +"|"+usuario.getUser().trim()+"|"+listado.get(position).getSecuencia();
+
+                                                                            EliminarRegistroInventario(trama);
+                                                                            //listainventario.remove(position);
+                                                                            startActivity(intent);
+                                                                            finish();
+
+                                                                        }
+                                                                    }
                                                             );
 
                                                             builder.setNegativeButton("Cancelar", null);
@@ -439,6 +441,7 @@ public class ConsultaActivity extends AppCompatActivity {
                                             return true;
                                         }
                                     });
+
                                 }
 
                             } else {
@@ -476,6 +479,7 @@ public class ConsultaActivity extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setCancelable(false);
 
+
         // TODO se debe realizar la actualizacion del articulo
 
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
@@ -484,6 +488,8 @@ public class ConsultaActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response1) {
+
+
 
                     }
                 }, new Response.ErrorListener() {
@@ -497,5 +503,10 @@ public class ConsultaActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
+
+
+
     }
+
+
 }

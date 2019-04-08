@@ -17,26 +17,46 @@ public class MainActivity extends AppCompatActivity {
     Usuario usuario;
     ArrayList<Inventario> listaProductosInventario;
     TextView tvnombreusuario;
+    ArrayList<RegistroInventario> listainventario;
     Button btntomainventario, btnconsultalectura, btnsalir;
     RegistroInventario registroInventario;
-    String acumulador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        usuario = (Usuario)getIntent().getSerializableExtra("Usuario");
         tvnombreusuario =  findViewById(R.id.tvNombreUsuario2);
         btntomainventario = findViewById(R.id.btnInventario);
         btnconsultalectura = findViewById(R.id.btnconsultalectura);
         btnsalir = findViewById(R.id.btnSalirSistema);
 
-        usuario = (Usuario)getIntent().getSerializableExtra("Usuario");
-        acumulador = getIntent().getStringExtra("Acumulador");
-
-
         tvnombreusuario.setText("USUARIO : " + usuario.getNombre());
+
+        listainventario = new ArrayList<>();
+        registroInventario = new RegistroInventario();
+
+        registroInventario.setCantidad("12");
+        registroInventario.setFecha("06/03/19");
+        registroInventario.setHora("19:02");
+
+        listainventario.add(registroInventario);
+
+        registroInventario = new RegistroInventario();
+
+        registroInventario.setCantidad("16");
+        registroInventario.setFecha("06/03/19");
+        registroInventario.setHora("19:03");
+
+        listainventario.add(registroInventario);
+
+        registroInventario = new RegistroInventario();
+
+        registroInventario.setCantidad("6");
+        registroInventario.setFecha("06/03/19");
+        registroInventario.setHora("19:05");
+        listainventario.add(registroInventario);
 
         btntomainventario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 //ConsultarListaInvenrtario();
 
                 Intent intent =  new Intent(MainActivity.this,RegistroInventarioActivity.class);
-                intent.putExtra("Acumulador",acumulador);
+                intent.putExtra("Acumulador","1");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Usuario",usuario);
                 intent.putExtras(bundle);
@@ -67,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 Intent intent =  new Intent(MainActivity.this,ConsultaActivity.class);
-                intent.putExtra("Acumulador",acumulador);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("listaProductosInventario", listaProductosInventario);
                 intent.putExtras(bundle);
                 Bundle bundle1 = new Bundle();
                 bundle1.putSerializable("Usuario",usuario);
                 intent.putExtras(bundle1);
+                Bundle bundle2 = new Bundle();
+                bundle2.putSerializable("listainventario",listainventario);
+                intent.putExtras(bundle2);
                 startActivity(intent);
                 finish();
             }

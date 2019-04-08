@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -70,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response1) {
                         String Mensaje = "";
-                        Toast.makeText(LoginActivity.this, response1, Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject=new JSONObject(response1);
                             boolean success = jsonObject.getBoolean("success");
@@ -105,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                                             .show();
                                 }else {
 
-
                                     JSONArray jsonArray = jsonObject.getJSONArray("hojaruta");
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         usuario = new Usuario();
@@ -124,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("Acumulador","1");
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable("Usuario", usuario);
                                     intent.putExtras(bundle);
@@ -156,8 +152,6 @@ public class LoginActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
     }
-
-
 
 
 }

@@ -55,7 +55,6 @@ public class RegistroInventarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro_inventario);
 
         if (acumulador<=1){
-
             acumuladorStr = getIntent().getStringExtra("Acumulador");
             acumulador = Integer.valueOf(acumuladorStr);
         }
@@ -95,6 +94,7 @@ public class RegistroInventarioActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RegistroInventarioActivity.this,MainActivity.class);
                 intent.putExtra("Acumulador",""+acumulador);
+
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Usuario",usuario);
                 intent.putExtras(bundle);
@@ -274,7 +274,6 @@ public class RegistroInventarioActivity extends AppCompatActivity {
                                         simbolos.setGroupingSeparator(',');// Se define el simbolo para el separador de los miles
                                         final DecimalFormat formateador = new DecimalFormat("###,##0.00",simbolos); // Se crea el formato del numero con los simbolo
 
-
                                         Double codEquivalencia = Double.valueOf(articulo.getEquivalenciaNew());
 
                                         formateador.format((double) codEquivalencia);
@@ -282,14 +281,12 @@ public class RegistroInventarioActivity extends AppCompatActivity {
                                         tvconteo.setVisibility(View.VISIBLE);
                                         tvconteo.setText("CONTEO : " + usuario.getConteo());
                                         tvdetallearticulo.setText(articulo.getCodArticulo() + " - " + articulo.getArticulo());
-
                                         tvmarca.setText(jsonObject.getString("MARCA"));
                                         String Conteo = "Conteo : "+jsonObject.getString("CONTEO");
                                         String Codigo = jsonObject.getString("UND_MEDIDA") + " - " +jsonObject.getString("EQUIVALENCIA_NEW");
                                         tv4.setText(Codigo);
                                         //etarticulo.setText("");
                                         etcantidad.requestFocus();
-
                                     }
                                 }
                             } else {

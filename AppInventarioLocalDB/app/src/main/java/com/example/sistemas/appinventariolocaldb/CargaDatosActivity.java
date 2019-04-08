@@ -60,7 +60,7 @@ import static com.example.sistemas.appinventariolocaldb.Utilidades.Utilidad.TABL
 public class CargaDatosActivity extends AppCompatActivity {
 
     Button btncargaususrio, btncargaarticulo, btncargabarrasarticulo, btncargapresentacion,
-            btnborrardatabase,btnregistro,btnenviarinventario,btnDropUsuario;
+            btnborrardatabase,btnregistro,btnenviarinventario;
     Usuario usuario;
     Articulo articulo;
     BarrasPresentacion barrasPresentacion;
@@ -71,7 +71,6 @@ public class CargaDatosActivity extends AppCompatActivity {
     TextView tvmensaje;
     Presentacion presentacion;
     ArrayList<Presentacion> listapresentacion;
-    Integer enterito;
     ConexionSQLiteHelper conn;
     ImageButton ibretornologeo;
 
@@ -89,8 +88,6 @@ public class CargaDatosActivity extends AppCompatActivity {
         tvmensaje = findViewById(R.id.tvMensaje);
         btnenviarinventario = findViewById(R.id.btnEnviarInventario);
         ibretornologeo = findViewById(R.id.ibretornologeo);
-        btnDropUsuario = findViewById(R.id.btnDropUsuario);
-
         usuario = (Usuario) getIntent().getSerializableExtra("Usuario");
 
         conn=new ConexionSQLiteHelper(getApplicationContext(),"bd_inventarios",null,1);
@@ -166,28 +163,6 @@ public class CargaDatosActivity extends AppCompatActivity {
 
             }
         });
-        btnDropUsuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                BorrarTablaUsuario();
-
-            }
-        });
-    }
-
-    private void BorrarTablaUsuario() {
-
-        ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"bd_inventarios",null,1);
-
-        SQLiteDatabase db=conn.getWritableDatabase();
-
-
-        db.execSQL("DROP TABLE IF EXISTS "+Utilidad.TABLA_USUARIO);
-
-        //tvmensaje.setText(""+listadoCargaUsuarios.size());
-        db.close();
-
     }
 
     private void EnviarInventario() {
@@ -258,6 +233,9 @@ public class CargaDatosActivity extends AppCompatActivity {
 
     private void CargarPrsentacion() {
 
+        final ProgressDialog progressDialog = new ProgressDialog(CargaDatosActivity.this);
+        progressDialog.setMessage("Mensaje");
+        progressDialog.show();
 
 
         listapresentacion = new ArrayList<Presentacion>();
@@ -284,6 +262,8 @@ public class CargaDatosActivity extends AppCompatActivity {
                                         listapresentacion.add(presentacion);
                                     }
                                     CargarPresentaciondbQuery(listapresentacion);
+
+                                    progressDialog.dismiss();
 
                             }else{
                                 AlertDialog.Builder build1 = new AlertDialog.Builder(CargaDatosActivity.this);
@@ -572,6 +552,7 @@ public class CargaDatosActivity extends AppCompatActivity {
     private void CargarBarrasPresentaciondbQuery(ArrayList<BarrasPresentacion> listaBarrasPresentacion) {
 
         ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"bd_inventarios",null,1);
+
         SQLiteDatabase db=conn.getWritableDatabase();
 
         for (int i = 0;i<listaBarrasPresentacion.size();i++){
